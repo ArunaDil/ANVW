@@ -13,5 +13,5 @@ public class Level2Activity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.level2);
     }
-
+  //
 }
