@@ -20,6 +20,49 @@
         <activity android:name=".SettingsActivity">
 
         </activity>
+        <activity android:name=".ScoreBoardActivity">
+
+        </activity>
+
+    <activity android:name=".HelpActivity">
+
+    </activity>
+
+        <activity android:name=".PlayActivity">
+
+        </activity>
+
+        <activity android:name=".SelectLevelActivity">
+
+        </activity>
+
+        <activity android:name=".NewGameActivity">
+
+        </activity>
+
+        <activity android:name=".PauseActivity">
+
+        </activity>
+
+        <activity android:name=".Level1Activity">
+
+        </activity>
+
+        <activity android:name=".Level2Activity">
+
+        </activity>
+
+        <activity android:name=".Level3Activity">
+
+        </activity>
+
+        <activity android:name=".Level4Activity">
+
+        </activity>
+
+
+
+
 
     </application>
 
