@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "262213867994",
+    "firebase_url": "https://anvw-dde52.firebaseio.com",
+    "project_id": "anvw-dde52",
+    "storage_bucket": "anvw-dde52.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:262213867994:android:fcc018a5d2d08a5e4948e3",
+        "android_client_info": {
+          "package_name": "com.example.anvw"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "262213867994-293gqsblkjth9470qgp0cot8gpuvih2p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.anvw",
+            "certificate_hash": "7b4b988cc9e7ead7162b07527ae3cf441e2a2b03"
+          }
+        },
+        {
+          "client_id": "262213867994-rgr0a1biarno0sbvv3rrqlvvh294rlfa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBnlR_n_soQrBAX3H9ijXdUPYHXljXYiNk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "262213867994-rgr0a1biarno0sbvv3rrqlvvh294rlfa.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

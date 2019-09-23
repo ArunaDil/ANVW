@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class SelectLevelActivity extends Activity {
     Button btn_lvl1,btn_lvl2,btn_lvl3,btn_lvl4;
 
@@ -56,6 +59,11 @@ public class SelectLevelActivity extends Activity {
             public void onClick(View arg0) {
                 System.out.println(getResources().getString(R.string.clicked_btn_play));
 
+                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                DatabaseReference myRef = database.getReference("Player");
+
+                myRef.setValue("Hello, World!");
+
                 // Start NewGameActivity.class
                 Intent myIntent = new Intent(SelectLevelActivity.this,
                         Level4Activity.class);
@@ -64,69 +72,5 @@ public class SelectLevelActivity extends Activity {
         });
     }
 
-    /*
-    // loads level1
-    public void loadSelectLevel1(View view) {
-        // System.out.println(getResources().getString(R.string.clicked_btn_Scoreboard));
 
-        // Get the view from activity_scoreboard.xml
-        setContentView(R.layout.level1);
-
-        // Get the correct button
-        button = findViewById(R.id.btn_level1);
-
-        // Start ScoreBoardActivity.class
-        Intent myIntent = new Intent(SelectLevelActivity.this, Level1Activity.class);
-        startActivity(myIntent);
-    }
-
-    // loads level2
-    public void loadSelectLevel2(View view) {
-        // System.out.println(getResources().getString(R.string.clicked_btn_Scoreboard));
-
-        // Get the view from activity_scoreboard.xml
-        setContentView(R.layout.level2);
-
-        // Get the correct button
-        button = findViewById(R.id.btn_level2);
-
-        // Start ScoreBoardActivity.class
-        Intent myIntent = new Intent(SelectLevelActivity.this, Level2Activity.class);
-        startActivity(myIntent);
-    }
-
-    // loads level3
-    public void loadSelectLevel3(View view) {
-        // System.out.println(getResources().getString(R.string.clicked_btn_Scoreboard));
-
-        // Get the view from activity_scoreboard.xml
-        setContentView(R.layout.level3);
-
-        // Get the correct button
-        button = findViewById(R.id.btn_level3);
-
-        // Start ScoreBoardActivity.class
-        Intent myIntent = new Intent(SelectLevelActivity.this, Level3Activity.class);
-        startActivity(myIntent);
-
-    }
-
-    // loads level4
-
-
-
-  /*  public void loadSelectLevel4(View view) {
-        // System.out.println(getResources().getString(R.string.clicked_btn_Scoreboard));
-
-        // Get the view from activity_scoreboard.xml
-        setContentView(R.layout.level4);
-
-        // Get the correct button
-        button = findViewById(R.id.btn_level4);
-
-        // Start ScoreBoardActivity.class
-        Intent myIntent = new Intent(SelectLevelActivity.this, Level4Activity.class);
-        startActivity(myIntent);
-    }
-*/
 }

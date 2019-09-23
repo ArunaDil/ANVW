@@ -1,12 +1,14 @@
 package com.example.anvw;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -14,24 +16,33 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Stack;
 
-public class LevelActivity extends View {
+public class L3 extends View {
+
+    int r = 0;
+    int g = 0;
+    int b = 0;
+
     private  enum Direction{
         UP, DOWN ,LEFT, RIGHT
     }
 
-    private Cell[][] cells;
-    private Cell player, exit;
-    private static final int COLS = 7, ROWS = 10;
-    private static final float WALL_THICKNESS = 8;
+    private L3.Cell[][] cells;
+    private L3.Cell player, exit;
+    private static final int COLS = 11, ROWS = 19;
+    private static final float WALL_THICKNESS = 4;
     private float cellsize, hMargin, vMargin;
-    private Paint wallpaint,playerPaint, exitPaint;
+    private Paint wallpaint,playerPaint, exitPaint, blackholePaint;
     private Random random;
+    private L3.Cell BH1;
+    private Canvas myCanvas;
 
-    public LevelActivity(Context context, @Nullable AttributeSet attrs){
+
+
+    public L3(Context context, @Nullable AttributeSet attrs){
         super(context, attrs);
 
         wallpaint = new Paint();
-        wallpaint.setColor(Color.WHITE);
+        wallpaint.setColor(Color.BLACK);
         wallpaint.setStrokeWidth(WALL_THICKNESS);
 
         playerPaint = new Paint();
@@ -40,13 +51,16 @@ public class LevelActivity extends View {
         exitPaint = new Paint();
         exitPaint.setColor(Color.BLUE);
 
+        blackholePaint = new Paint();
+        blackholePaint.setColor(Color.BLACK);
+
         random = new Random();
 
         createMaze();
 
     }
-    private Cell getNeighbour(Cell cell){
-        ArrayList<Cell> neighbours = new ArrayList<>();
+    private L3.Cell getNeighbour(L3.Cell cell){
+        ArrayList<L3.Cell> neighbours = new ArrayList<>();
 
         //left neighbour
         if(cell.col > 0)
@@ -75,7 +89,7 @@ public class LevelActivity extends View {
         return null;
     }
 
-    private void removeWall(Cell current, Cell next){
+    private void removeWall(L3.Cell current, L3.Cell next){
         if(current.col == next.col && current.row == next.row+1){
             current.topWall = false;
             next.bottomWall = false;
@@ -92,25 +106,41 @@ public class LevelActivity extends View {
             current.rightWall = false;
             next.leftWall = false;
         }
+        if(current.col == next.col+1 && current.row == next.row-1){
+            current.rightWall = false;
+            next.leftWall = false;
+        }
+        if(current.col == next.col-1 && current.row == next.row){
+            current.rightWall = false;
+            next.leftWall = false;
+        }
+
     }
 
-    private void createMaze(){
-        Stack<Cell> stack = new Stack<>();
-        Cell current, next;
 
-        cells = new Cell[COLS][ROWS];
+
+    private void createMaze(){
+        Stack<L3.Cell> stack = new Stack<>();
+        L3.Cell current, next;
+
+        cells = new L3.Cell[COLS][ROWS];
 
         for(int x=0; x<COLS; x++){
             for(int y=0; y<ROWS; y++){
-                cells[x][y] = new Cell(x, y);
+                cells[x][y] = new L3.Cell(x, y);
             }
         }
 
-        player = cells[0][0];
-        exit = cells[COLS-1][ROWS-1];
+        player = cells[3][5];
+        exit = cells[7][15];
+        BH1 = cells[0][0];
 
-        current = cells[0][0];
+
+
+        current = cells[4][5];
         current.visited = true;
+
+
 
         do {
             next = getNeighbour(current);
@@ -119,15 +149,23 @@ public class LevelActivity extends View {
                 stack.push(current);
                 current = next;
                 current.visited = true;
+                BH1 = current;
+
+
             }
-            else
+            else {
                 current = stack.pop();
-        }while(!stack.empty());
+
+            }
+
+        }while(!stack.isEmpty());
+
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
-        canvas.drawColor(Color.BLACK);
+        myCanvas = canvas;
+        canvas.drawColor(Color.DKGRAY);
 
         int width = getWidth();
         int height = getHeight();
@@ -175,18 +213,20 @@ public class LevelActivity extends View {
                             (x+1)*cellsize,
                             (y+1)*cellsize,
                             wallpaint);
-
             }
         }
 
         float margin = cellsize/10;
 
         canvas.drawRect(
-                player.col*cellsize+margin,
-                player.row*cellsize+margin,
-                (player.col+1)*cellsize-margin,
-                (player.row+1)*cellsize-margin,
+                player.col*cellsize+margin+5,
+                player.row*cellsize+margin+5,
+                (player.col+1)*cellsize-margin-5,
+                (player.row+1)*cellsize-margin-5,
                 playerPaint);
+
+
+
 
         canvas.drawRect(
                 exit.col*cellsize+margin,
@@ -194,35 +234,61 @@ public class LevelActivity extends View {
                 (exit.col+1)*cellsize-margin,
                 (exit.row+1)*cellsize-margin,
                 exitPaint);
+
+        canvas.drawRect(
+                BH1.col*cellsize+margin,
+                BH1.row*cellsize+margin,
+                (BH1.col+1)*cellsize-margin,
+                (BH1.row+1)*cellsize-margin,
+                blackholePaint);
     }
 
-    private void movePlayer(Direction direction){
+    private void movePlayer(L3.Direction direction){
         switch (direction){
             case UP:
                 if(!player.topWall)
                     player = cells[player.col][player.row-1];
+
                 break;
             case DOWN:
                 if(!player.bottomWall)
                     player = cells[player.col][player.row+1];
+
                 break;
             case LEFT:
                 if(!player.leftWall)
                     player = cells[player.col-1][player.row];
+
                 break;
             case RIGHT:
                 if(!player.rightWall)
                     player = cells[player.col+1][player.row];
+
                 break;
         }
+
         checkExit();
         invalidate();
     }
 
     private void checkExit(){
-        if(player == exit)
-            createMaze();
+        if(player == exit) {
+            //createMaze();
+            Toast to1 = Toast.makeText(this.getContext(),"Try Again",Toast.LENGTH_LONG);
+            to1.show();
+
+
+        }
+        if(player == BH1) {
+
+                //createMaze();
+            Toast to1 = Toast.makeText(this.getContext(),"Level Complete",Toast.LENGTH_LONG);
+            to1.show();
+            Player.setIsLevelComplete();
+
+            }
     }
+
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
@@ -245,22 +311,23 @@ public class LevelActivity extends View {
             if(absDx > cellsize || absDy > cellsize){
                 if(absDx > absDy){
                     //move in x-direction
-                    if(dx > 0)
-                        movePlayer(Direction.RIGHT);
-
-                    else
-                        movePlayer(Direction.LEFT);
-
+                    if(dx > 0) {
+                        movePlayer(L3.Direction.RIGHT);
+                    }
+                    else {
+                        movePlayer(L3.Direction.LEFT);
+                    }
                 }
                 else{
                     //move in y-direction
-                    if(dy > 0)
-                        movePlayer(Direction.DOWN);
-
-                    else
-                        movePlayer(Direction.UP);
-
+                    if(dy > 0) {
+                        movePlayer(L3.Direction.DOWN);
+                    }
+                    else {
+                        movePlayer(L3.Direction.UP);
+                    }
                 }
+
             }
             return true;
         }
@@ -282,5 +349,51 @@ public class LevelActivity extends View {
             this.col = col;
             this.row = row;
         }
+
+        public boolean isTopWall() {
+            return topWall;
+        }
+
+        public boolean isLeftWall() {
+            return leftWall;
+        }
+
+        public boolean isBottomWall() {
+            return bottomWall;
+        }
+
+        public boolean isRightWall() {
+            return rightWall;
+        }
+
+        public int getCol() {
+            return col;
+        }
+
+        public int getRow() {
+            return row;
+        }
     }
+
+    private class BlackHole{
+        boolean
+                topWall = true,
+                leftWall = true,
+                bottomWall = true,
+                rightWall = true,
+                visited = false;
+
+        int col, row;
+
+        public BlackHole(int col, int row) {
+            this.col = col;
+            this.row = row;
+        }
+    }
+
+    public Canvas getMyCanvas() {
+        return myCanvas;
+    }
+
+
 }

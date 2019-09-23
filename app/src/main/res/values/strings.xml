@@ -46,5 +46,36 @@
     <string name="clicked_btn_Help">clicked help</string>
     <string name="clicked_btn_Quit">clicked quit</string>
 
+    <string name="complete">LEVEL COMPLETED</string>
+    <string name="currentlevel">(level)</string>
+    <string name="score">Score</string>
+    <string name="lscore">(yourscore)</string>
+    <string name="click_next">NEXT</string>
+
+    <string name="warning_enterName">Give A Name First...</string>
+
+    <string name="Level">(level)</string>
+    <string name="yoyeScore">YOUR SCORE</string>
+    <string name="yscore">(score)</string>
+    <string name="retry">RETRY</string>
+
+    <string name="next">NEXT</string>
+    <string name="fragment_dialog">dialog</string>
+
+    <string name="toMain">GoToMain</string>
+
+    <string name="over">GAME OVER !</string>
+    <string name="YourScore">YOUR SCORE</string>
+    <string name="sScore">(Score)</string>
+    <string name="RETRY">RETRY</string>
+    <string name="GoToMain">Go To Main</string>
+
+    <string name="next2">NEXT</string>
+
+    <string name="comple">LEVEL COMPLETED</string>
+    <string name="level">(level)</string>
+    <string name="Yscore">Your Score</string>
+    <string name="sc">(yourscore)</string>
+    <string name="Next">NEXT</string>
 
 </resources>

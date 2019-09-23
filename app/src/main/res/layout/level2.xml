@@ -4,4 +4,46 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/linearLayout8"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" />
+    android:layout_height="match_parent"
+    android:background="@drawable/b1">
+
+    <com.example.anvw.L2
+        android:id="@+id/l2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="112dp"
+        android:layout_height="16dp"
+        android:layout_marginStart="148dp"
+        android:layout_marginEnd="148dp"
+        android:layout_marginBottom="8dp"
+        android:textColor="@color/colorAccent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/btn_nextLevel3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/drawable_butten_rounded"
+        android:text="@string/next2"
+        android:textColor="@color/colorPrimary"
+        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintEnd_toStartOf="@+id/l2"
+        app:layout_constraintHorizontal_bias="0.737"
+        app:layout_constraintStart_toEndOf="@+id/l2"
+        app:layout_constraintTop_toBottomOf="@+id/l2"
+        app:layout_constraintVertical_bias="0.452" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -40,10 +40,6 @@
 
         </activity>
 
-        <activity android:name=".PauseActivity">
-
-        </activity>
-
         <activity android:name=".Level1Activity">
 
         </activity>

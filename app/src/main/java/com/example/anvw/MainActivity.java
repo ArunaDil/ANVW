@@ -1,17 +1,35 @@
 package com.example.anvw;
 
+import android.content.Context;
 import android.content.Intent;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.os.PersistableBundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+
 
 public class MainActivity extends AppCompatActivity {
+
+    @Override
+    public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
+        super.onCreate(savedInstanceState, persistentState);
+        setContentView(R.layout.level4);
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        MediaPlayer x = MusicActivity.getMediaPlayer();
+        x = MusicActivity.setMediaPlayer(getApplicationContext());
+        x.start();
 
         Button buttonPlay,buttonScoreBoard,buttonSettings,buttonHelp,buttonQuit;
 
@@ -79,7 +97,5 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-
-
-    }
+}
 
